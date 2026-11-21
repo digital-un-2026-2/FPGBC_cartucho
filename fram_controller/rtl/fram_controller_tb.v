@@ -24,8 +24,8 @@ module fram_controller_tb;
     localparam real    T_WATCHDOG = 200000.0;                // ns
     localparam real    EPS        = 0.001;                   // tolerancia (ns)
 
-    localparam DIR_HACIA_CTRL = 1'b0;
-    localparam DIR_HACIA_CART = 1'b1;
+    localparam DIR_HACIA_CTRL = 1'b1;   // A (cartucho) -> B (FPGA)
+    localparam DIR_HACIA_CART = 1'b0;   // B (FPGA) -> A (cartucho)
 
     // ------------------------------------------------------------------
     // Reloj, reset y procesador

@@ -54,8 +54,10 @@ module fram_fsm (
     output wire       d_oe
 );
 
-    localparam DIR_HACIA_CTRL = 1'b0;   // cartucho -> controlador (B->A)
-    localparam DIR_HACIA_CART = 1'b1;   // controlador -> cartucho (A->B)
+    // Buffer de datos (SN74LVC8T245): lado A = cartucho, lado B = FPGA.
+    // DIR = 1: A -> B; DIR = 0: B -> A.
+    localparam DIR_HACIA_CTRL = 1'b1;   // cartucho -> controlador (A->B)
+    localparam DIR_HACIA_CART = 1'b0;   // controlador -> cartucho (B->A)
 
     localparam OP_ESCRIBIR = 1'b0;
     localparam OP_LEER     = 1'b1;

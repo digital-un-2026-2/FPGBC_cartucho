@@ -130,15 +130,15 @@ ESCRIBIR_BUS : "Sub-máquina ESCRIBIR_BUS (flanco positivo, one-hot)" {
         class : estado
         style.fill : "#D7CCC8"
     }
-    W_SU : "W_SU\n\n#CS = cs\nD_OE = 1\nDATA_DIR = HACIA_CART\ntmr_sel = T_SU" {
+    W_SU : "W_SU\n\n#CS = cs\nD_OE = 1\nDATA_DIR = HACIA_CART (0)\ntmr_sel = T_SU" {
         class : estado
         style.fill : "#C8E6C9"
     }
-    W_WP : "W_WP\n\n#WR = 0, #CS = cs\nD_OE = 1\nDATA_DIR = HACIA_CART\ntmr_sel = T_WP" {
+    W_WP : "W_WP\n\n#WR = 0, #CS = cs\nD_OE = 1\nDATA_DIR = HACIA_CART (0)\ntmr_sel = T_WP" {
         class : estado
         style.fill : "#FFAB91"
     }
-    W_HD : "W_HD\n\n#CS = cs\nD_OE = 1\nDATA_DIR = HACIA_CART\ntmr_sel = T_HD" {
+    W_HD : "W_HD\n\n#CS = cs\nD_OE = 1\nDATA_DIR = HACIA_CART (0)\ntmr_sel = T_HD" {
         class : estado
         style.fill : "#B3E5FC"
     }
@@ -215,7 +215,7 @@ defecto : "Valores por defecto (salidas no listadas en el estado)" {
     style.fill : "#5F6368"
     "#WR, #RD, #CS" : "1" {constraint : bus}
     D_OE : "0" {constraint : bus}
-    DATA_DIR : "HACIA_CTRL" {constraint : bus}
+    DATA_DIR : "HACIA_CTRL (1)" {constraint : bus}
     CMD_OE : "1" {constraint : bus}
     "mem_rbusy, mem_wbusy" : "0" {constraint : CPU}
     "addr_sel, dq_sel" : "0" {constraint : mux}

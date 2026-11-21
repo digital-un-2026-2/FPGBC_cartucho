@@ -1,22 +1,24 @@
 [*]
 [*] GTKWave Analyzer v3.3.128 (w)1999-2026 BSI
-[*] Tue Nov 17 15:10:02 2026
+[*] Sat Nov 21 16:40:54 2026
 [*]
 [dumpfile] "/home/samuel/Repositories/FPGBC_cartucho_fram_controller/fram_controller/rtl/fram_controller_tb.vcd"
-[dumpfile_mtime] "Tue Nov 17 14:34:15 2026"
+[dumpfile_mtime] "Sat Nov 21 16:30:01 2026"
 [dumpfile_size] 100135
 [savefile] "/home/samuel/Repositories/FPGBC_cartucho_fram_controller/fram_controller/rtl/signals_fram_controller_tb.gtkw"
-[timestart] 0
+[timestart] 11155000
 [size] 1912 1025
 [pos] -27 -24
-*-19.557037 1612500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-18.557037 12400000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] fram_controller_tb.
-[sst_width] 43
+[treeopen] fram_controller_tb.dut.
+[sst_width] 290
 [signals_width] 320
-[sst_expanded] 0
+[sst_expanded] 1
 [sst_vpaned_height] 305
-@28
+@29
 fram_controller_tb.dut.clk
+@28
 fram_controller_tb.dut.rst
 @200
 -CPU
@@ -39,11 +41,11 @@ fram_controller_tb.dut.mem_wmask[3:0]
 (1)fram_controller_tb.dut.mem_wmask[3:0]
 (2)fram_controller_tb.dut.mem_wmask[3:0]
 (3)fram_controller_tb.dut.mem_wmask[3:0]
-@1401208
+@1401200
 -group_end
 @28
 fram_controller_tb.dut.mem_rstrb
-@201
+@200
 -FRAM Controller
 @22
 fram_controller_tb.dut.addr[15:0]
@@ -54,5 +56,8 @@ fram_controller_tb.dut.rd_n
 fram_controller_tb.dut.cs_n
 fram_controller_tb.dut.cmd_oe
 fram_controller_tb.dut.data_dir
+@820
+fram_controller_tb.dut.u_fsm.state_name[320:1]
+fram_controller_tb.dut.u_fsm.r_state_name[320:1]
 [pattern_trace] 1
 [pattern_trace] 0

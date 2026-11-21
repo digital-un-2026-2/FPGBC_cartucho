@@ -26,7 +26,7 @@ sim: $(SRC) $(TB) times.vh
 	vvp -n $(TOP)_tb.vvp
 
 wave: sim
-	gtkwave $(TOP)_tb.vcd signals_$(TOP)_tb.gtkw
+	gtkwave $(TOP)_tb.vcd signals_$(TOP)_tb.gtkw &
 
 # Síntesis de prueba para la familia de la consola (GW2A)
 synth: $(SRC) times.vh

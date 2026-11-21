@@ -37,7 +37,7 @@ module fram_hw_test (
     output        cart_rd_n,
     output        cart_cs_n,
     output        cart_cmd_oe,  // habilitación del buffer de control (activo en alto)
-    output        cart_data_dir // buffer de datos: 1 = hacia el cartucho
+    output        cart_data_dir // buffer de datos: 0 = hacia el cartucho, 1 = hacia la FPGA
 );
 
    // Reset al encender: mantiene el reset 16 ciclos tras configurar la FPGA

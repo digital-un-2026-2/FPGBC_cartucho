@@ -22,7 +22,7 @@ module fram_controller (
     output wire        rd_n,
     output wire        cs_n,
     output wire        cmd_oe,        // habilitación del buffer de control
-    output wire        data_dir       // 1 = hacia el cartucho, 0 = hacia el controlador
+    output wire        data_dir       // 0 = hacia el cartucho (B->A), 1 = hacia el controlador (A->B)
 );
 
     // Señales internas (mismos nombres que en data_path.d2)

@@ -30,9 +30,9 @@ Lado cartucho (a través de los buffers externos):
     D_OUT[7:0]       salida    dato que el controlador pone en el bus
     D_OE             salida    1 = la FPGA maneja D[7:0]; 0 = alta impedancia
     D_IN[7:0]        entrada   dato leído del bus
-    DATA_DIR         salida    dirección del buffer de datos:
-                                   HACIA_CART = controlador -> cartucho (escritura)(A->B 1)
-                                   HACIA_CTRL = cartucho -> controlador (lectura / reposo)(B->A 0)
+    DATA_DIR         salida    dirección del buffer de datos (lado A = cartucho, lado B = FPGA):
+                                   HACIA_CART = controlador -> cartucho (escritura)(B->A 0)
+                                   HACIA_CTRL = cartucho -> controlador (lectura / reposo)(A->B 1)
     #WR, #RD, #CS    salida    señales de control del bus Game Boy (vía buffer de control)
     CMD_OE           salida    habilitación del buffer de control (activo en alto)
 

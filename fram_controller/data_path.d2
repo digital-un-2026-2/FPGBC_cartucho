@@ -110,7 +110,7 @@ FSM : "FSM (sinc: principal flanco -, sub-máquinas flanco +)" {
     "dq_sel[1:0]" : "DQ MUX" {constraint : out}
     "#WR, #RD, #CS" : "Buffer de control  (reposo: 1)" {constraint : out}
     CMD_OE : "Buffer de control  (0 en RESET)" {constraint : out}
-    DATA_DIR : "Buffer de datos  (reposo: HACIA_CTRL)" {constraint : out}
+    DATA_DIR : "Buffer de datos  (reposo: HACIA_CTRL = 1)" {constraint : out}
     D_OE : "DQ TRI  (reposo: 0)" {constraint : out}
 }
 
@@ -209,9 +209,9 @@ DQ_TRI : "DQ TRI (comb)" {
 
 BUF_DATA : "Buffer de datos (externo)" {
     class : ext
-    DATA_DIR : "FSM" {constraint : in}
-    "D[7:0]" : "DQ TRI" {constraint : inout}
-    "D[7:0] " : "Cartucho" {constraint : inout}
+    DATA_DIR : "FSM  (0: B->A, 1: A->B)" {constraint : in}
+    "D[7:0]" : "DQ TRI  (lado B)" {constraint : inout}
+    "D[7:0] " : "Cartucho  (lado A)" {constraint : inout}
 }
 
 BUF_CMD : "Buffer de control (externo)" {
