@@ -1,0 +1,78 @@
+IO_LOC "clk" 11;
+IO_PORT "clk" IO_TYPE=LVCMOS33;
+// UART según Litex/board/fpgbc_plat.py y su CST generado: TX=27, RX=28.
+IO_LOC "TXD" 27;
+IO_PORT "TXD" IO_TYPE=LVCMOS33;
+IO_LOC "RXD" 28;
+IO_PORT "RXD" IO_TYPE=LVCMOS33;
+IO_LOC "link_oe" 29;
+IO_PORT "link_oe" IO_TYPE=LVCMOS33;
+IO_LOC "resetn" 120;
+IO_PORT "resetn" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+// Cartucho: IO de FPGA a 3.3 V; VCCIO debe estar alimentado a 3.3 V.
+// Control: contactos 2=CLK, 3=/WR, 4=/RD, 5=/CS.
+IO_LOC "cart_clk" 60;
+IO_PORT "cart_clk" IO_TYPE=LVCMOS33;
+IO_LOC "cart_wr_n" 61;
+IO_PORT "cart_wr_n" IO_TYPE=LVCMOS33;
+IO_LOC "cart_rd_n" 62;
+IO_PORT "cart_rd_n" IO_TYPE=LVCMOS33;
+IO_LOC "cart_cs_n" 63;
+IO_PORT "cart_cs_n" IO_TYPE=LVCMOS33;
+IO_LOC "cart_ctrl_oe" 48;
+IO_PORT "cart_ctrl_oe" IO_TYPE=LVCMOS33;
+IO_LOC "cart_data_dir" 59;
+IO_PORT "cart_data_dir" IO_TYPE=LVCMOS33;
+
+// Direcciones A0..A15: contactos 6..21.
+IO_LOC "cart_addr[0]" 64;
+IO_PORT "cart_addr[0]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[1]" 65;
+IO_PORT "cart_addr[1]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[2]" 66;
+IO_PORT "cart_addr[2]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[3]" 67;
+IO_PORT "cart_addr[3]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[4]" 68;
+IO_PORT "cart_addr[4]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[5]" 69;
+IO_PORT "cart_addr[5]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[6]" 70;
+IO_PORT "cart_addr[6]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[7]" 71;
+IO_PORT "cart_addr[7]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[8]" 72;
+IO_PORT "cart_addr[8]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[9]" 76;
+IO_PORT "cart_addr[9]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[10]" 78;
+IO_PORT "cart_addr[10]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[11]" 79;
+IO_PORT "cart_addr[11]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[12]" 80;
+IO_PORT "cart_addr[12]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[13]" 82;
+IO_PORT "cart_addr[13]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[14]" 83;
+IO_PORT "cart_addr[14]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_addr[15]" 84;
+IO_PORT "cart_addr[15]" IO_TYPE=LVCMOS33;
+
+// Datos: contacto 22=D0 ... contacto 29=D7.
+// Orden corregido según comparación del volcado con firmware_mbc5.gb.
+IO_LOC "cart_data[0]" 45;
+IO_PORT "cart_data[0]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_data[1]" 44;
+IO_PORT "cart_data[1]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_data[2]" 43;
+IO_PORT "cart_data[2]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_data[3]" 42;
+IO_PORT "cart_data[3]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_data[4]" 41;
+IO_PORT "cart_data[4]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_data[5]" 40;
+IO_PORT "cart_data[5]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_data[6]" 39;
+IO_PORT "cart_data[6]" IO_TYPE=LVCMOS33;
+IO_LOC "cart_data[7]" 38;
+IO_PORT "cart_data[7]" IO_TYPE=LVCMOS33;
