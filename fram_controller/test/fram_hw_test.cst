@@ -64,19 +64,19 @@ IO_LOC "cart_addr[15]" 84;
 IO_PORT "cart_addr[15]" IO_TYPE=LVCMOS33;
 
 // Cartucho: datos D0-D7 (vía buffer de datos)
-IO_LOC "cart_d[0]" 38;
+IO_LOC "cart_d[0]" 45;
 IO_PORT "cart_d[0]" IO_TYPE=LVCMOS33;
-IO_LOC "cart_d[1]" 39;
+IO_LOC "cart_d[1]" 44;
 IO_PORT "cart_d[1]" IO_TYPE=LVCMOS33;
-IO_LOC "cart_d[2]" 40;
+IO_LOC "cart_d[2]" 43;
 IO_PORT "cart_d[2]" IO_TYPE=LVCMOS33;
-IO_LOC "cart_d[3]" 41;
+IO_LOC "cart_d[3]" 42;
 IO_PORT "cart_d[3]" IO_TYPE=LVCMOS33;
-IO_LOC "cart_d[4]" 42;
+IO_LOC "cart_d[4]" 41;
 IO_PORT "cart_d[4]" IO_TYPE=LVCMOS33;
-IO_LOC "cart_d[5]" 43;
+IO_LOC "cart_d[5]" 40;
 IO_PORT "cart_d[5]" IO_TYPE=LVCMOS33;
-IO_LOC "cart_d[6]" 44;
+IO_LOC "cart_d[6]" 39;
 IO_PORT "cart_d[6]" IO_TYPE=LVCMOS33;
-IO_LOC "cart_d[7]" 45;
+IO_LOC "cart_d[7]" 38;
 IO_PORT "cart_d[7]" IO_TYPE=LVCMOS33;
