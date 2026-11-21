@@ -91,7 +91,25 @@ Los bloques en azul son síncronos (contienen registros) y los verdes son combin
 
 ![Data path del controlador FRAM](out_data_path.svg)
 
+### Diagrama de estados
+La FSM principal recorre la secuencia de habilitación, acceso y deshabilitación; los ciclos de bus se delegan a dos sub-máquinas (`ESCRIBIR_BUS` y `LEER_BUS`) que se activan con `llamar_w` / `llamar_r` y responden con `bus_done`.
+
+![Diagrama de estados de la FSM](out_states.svg)
+
 Para procesadores RISC-V se utiliza representación en little-endian
 
+## Implementación RTL
+La carpeta [`rtl/`](rtl) contiene la implementación en Verilog: un módulo por bloque del data path (`fram_*.v`) y el módulo superior `fram_controller.v`. Los tiempos del bus se ajustan en [`rtl/times.vh`](rtl/times.vh), en ns, junto con la frecuencia del reloj; el TIMER los convierte a ciclos.
 
+- La FSM principal cambia en el flanco negativo; las sub-máquinas `ESCRIBIR_BUS` / `LEER_BUS`, el TIMER y el resto del data path, en el flanco positivo. Todas las salidas de las máquinas de estado son combinacionales según el estado actual.
+- Con la macro `BENCH` definida, cada máquina de estados expone el nombre de su estado en ASCII (`state_name`, `w_state_name`, `r_state_name`) para verlo en la forma de onda.
+
+Con el entorno de `FPGBC_digital_UN` activo:
+
+```bash
+cd rtl
+make sim     # testbench: 3 escrituras y 3 lecturas (reloj de 40 MHz)
+make wave    # simulación + gtkwave
+make synth   # síntesis de prueba con yosys (synth_gowin, GW2A)
+```
 

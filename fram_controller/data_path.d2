@@ -24,9 +24,10 @@ title : Data path controlador FRAM v1 {
 # registros arrancan en un valor conocido al configurar la FPGA, sin depender
 # de las señales *_ld.
 #
-# Las salidas hacia el bus (#WR, #RD, #CS, CMD_OE, DATA_DIR, D_OE) son
-# registros de la FSM: cambian en el mismo flanco que el estado, sin ciclo
-# extra y sin glitches.
+# Todas las salidas de la FSM (incluidas #WR, #RD, #CS, CMD_OE, DATA_DIR,
+# D_OE) son combinacionales según el estado actual (Moore). La máquina
+# principal cambia en el flanco negativo, así sus salidas están estables
+# cuando los bloques de flanco positivo las muestrean.
 
 classes : {
     sinc : {
@@ -80,7 +81,7 @@ CPU : "FemtoRV (externo)" {
 
 # ---------------- Control ----------------
 
-FSM : "FSM (sinc)" {
+FSM : "FSM (sinc: principal flanco -, sub-máquinas flanco +)" {
     class : sinc
     rst : "Sistema" {constraint : in}
     mem_rstrb : "CPU" {constraint : in}
@@ -89,8 +90,12 @@ FSM : "FSM (sinc)" {
     i_last : "BYTE COUNTER" {constraint : in}
     lane_en : "REQ REG" {constraint : in}
     banco_cambia : "BANK SELECTOR" {constraint : in}
-    estado : "reset: RESET" {constraint : reg}
-    op : "LEER / ESCRIBIR" {constraint : reg}
+    estado : "principal, flanco -, reset: RESET" {constraint : reg}
+    op : "LEER / ESCRIBIR, flanco -" {constraint : reg}
+    w_estado : "ESCRIBIR_BUS, flanco +, blk_rst: W_IDLE" {constraint : reg}
+    r_estado : "LEER_BUS, flanco +, blk_rst: R_IDLE" {constraint : reg}
+    "llamar_w, llamar_r, cs" : "principal -> sub-máquinas" {constraint : interno}
+    bus_done : "sub-máquinas -> principal" {constraint : interno}
     blk_rst : "todos los bloques síncronos  (= rst)" {constraint : out}
     mem_rbusy : "CPU  (reset: 0)" {constraint : out}
     mem_wbusy : "CPU  (reset: 0)" {constraint : out}
@@ -103,10 +108,10 @@ FSM : "FSM (sinc)" {
     "tmr_sel[2:0]" : "TIMER" {constraint : out}
     "addr_sel[1:0]" : "ADDR OUT" {constraint : out}
     "dq_sel[1:0]" : "DQ MUX" {constraint : out}
-    "#WR, #RD, #CS" : "Buffer de control  (registradas, reset: 1)" {constraint : out}
-    CMD_OE : "Buffer de control  (registrada, reset: 0)" {constraint : out}
-    DATA_DIR : "Buffer de datos  (registrada, reset: HACIA_CTRL)" {constraint : out}
-    D_OE : "DQ TRI  (registrada, reset: 0)" {constraint : out}
+    "#WR, #RD, #CS" : "Buffer de control  (reposo: 1)" {constraint : out}
+    CMD_OE : "Buffer de control  (0 en RESET)" {constraint : out}
+    DATA_DIR : "Buffer de datos  (reposo: HACIA_CTRL)" {constraint : out}
+    D_OE : "DQ TRI  (reposo: 0)" {constraint : out}
 }
 
 TIMER : "TIMER (sinc)" {
@@ -114,8 +119,8 @@ TIMER : "TIMER (sinc)" {
     blk_rst : "FSM" {constraint : in}
     tmr_ld : "FSM" {constraint : in}
     "tmr_sel[2:0]" : "FSM" {constraint : in}
-    contador : "reset: 0, si tmr_ld: N(tmr_sel), si no: -1" {constraint : reg}
-    tmr_done : "FSM  (= contador == 0)" {constraint : out}
+    contador : "si blk_rst | tmr_ld | tmr_done: 0, si no: +1" {constraint : reg}
+    tmr_done : "FSM  (= contador >= N(tmr_sel) - 1)" {constraint : out}
 }
 
 BYTE_COUNTER : "BYTE COUNTER (sinc)" {
