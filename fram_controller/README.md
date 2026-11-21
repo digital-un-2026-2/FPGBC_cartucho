@@ -71,9 +71,9 @@ Sin embargo también es posible que la señal #CE1 cumpla con : `Si RAMG==0x0A :
 
 Sin embargo, en el esquemático del cartucho `/OE` de la FRAM y de la ROM están conectados ambos a `RD`, por lo que con la Hipótesis 2 una lectura de ROM con la RAM habilitada haría que ambas memorias manejaran el bus de datos al mismo tiempo. La recomendación de [^datasheet_MBC] busca proteger los datos ante escrituras espurias (por ejemplo al apagar), no indica que `#CE1` dependa solo de `RAMG`.
 
-Por lo que se considera un enfoque de acuerdo a **Hipótesis 1**, deshabilitando la RAM (`RAMG = 0x00`) al terminar cada operación. Ver el pseudocódigo en [flow.txt](flow.txt).
+Por lo que se considera un enfoque de acuerdo a **Hipótesis 1**, deshabilitando la RAM (`RAMG = 0x00`) al terminar cada operación. Ver el pseudocódigo en [flow.txt](docs/flow.txt).
 
-![Diagrama de flujo del controlador FRAM](out_flow.svg)
+![Diagrama de flujo del controlador FRAM](diagrams/out_flow.svg)
 
 ### Escritura
 Bajo esta hipótesis la escritura se explica mediante la figura 9 [^datasheet] en la que se indican los tiempos requeridos para realizar la operación, cabe resaltar que la escritura tiene prioridad sobre la lectura, por lo que se puede escribir en una dirección y inmediatamente leer.
@@ -85,16 +85,16 @@ Bajo esta hipótesis la lectura se explica mediante la figura 4 [^datasheet] en 
 Se debe tener en cuenta que el MBC-5 controla la señal de dirección de el buffer de datos de el cartucho y sin conocer este control, si tiene en cuenta la prioridad de la escritura para la FRAM, se asume que solo depende de si la señal es de lectura o de escritura por lo que se considera activar solo alguna de las 2 al realizar las operaciones.
 
 ## Arquitectura (v1)
-![Arquitectura del controlador FRAM](out_arch.svg)
+![Arquitectura del controlador FRAM](diagrams/out_arch.svg)
 
 Los bloques en azul son síncronos (contienen registros) y los verdes son combinacionales. El diagrama de arquitectura solo muestra las conexiones principales; el detalle de las entradas y salidas de cada bloque, con quién las produce y quién las recibe, está en el data path:
 
-![Data path del controlador FRAM](out_data_path.svg)
+![Data path del controlador FRAM](diagrams/out_data_path.svg)
 
 ### Diagrama de estados
 La FSM principal recorre la secuencia de habilitación, acceso y deshabilitación; los ciclos de bus se delegan a dos sub-máquinas (`ESCRIBIR_BUS` y `LEER_BUS`) que se activan con `llamar_w` / `llamar_r` y responden con `bus_done`.
 
-![Diagrama de estados de la FSM](out_states.svg)
+![Diagrama de estados de la FSM](diagrams/out_states.svg)
 
 Para procesadores RISC-V se utiliza representación en little-endian
 
